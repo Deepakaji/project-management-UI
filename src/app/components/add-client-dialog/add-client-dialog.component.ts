@@ -152,8 +152,8 @@ export class AddClientDialogComponent {
     this.snackBar.open(message, 'Close', {
       duration: 3000,
       panelClass: ['success-snackbar'],
-      horizontalPosition: 'center', // Align to center
-      verticalPosition: 'top' // Move to top
+      horizontalPosition: 'center',
+      verticalPosition: 'top'
     });
 
   }
