@@ -1,0 +1,87 @@
+<mat-toolbar class="topbar">
+
+  <app-branding></app-branding>
+
+  <!-- Mobile Menu -->
+
+  <button mat-icon-button (click)="toggleMobileNav.emit()" class="d-flex justify-content-center">
+    <i-tabler name="menu-2" class="icon-20 d-flex"></i-tabler>
+  </button>
+
+  <!-- Notification Button with Badge -->
+  <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Notifications" class="notification-btn">
+    <mat-icon>notifications</mat-icon>
+    <span *ngIf="notifications.length > 0" class="notification-badge">
+      {{ notifications.length }}
+    </span>
+  </button>
+
+  <!-- Notification Menu -->
+  <mat-menu #menu="matMenu" class="custom-menu">
+    <ng-container *ngIf="notifications.length > 0; else noNotifications">
+      <div class="notification-header">
+        <span class="title">Notifications</span>
+        <button mat-icon-button (click)="clearNotifications()" matTooltip="Clear all">
+          <mat-icon>clear_all</mat-icon>
+        </button>
+      </div>
+
+      <mat-divider></mat-divider>
+
+      <div class="notification-list">
+        <button mat-menu-item *ngFor="let notification of notifications; let i = index" class="notification-item">
+          <mat-icon class="notification-icon" [ngClass]="getNotificationIcon(notification.type)"></mat-icon>
+          <div class="notification-text">
+            <span class="message">{{ notification.message }}</span>
+            <span class="timestamp">{{ notification.time }}</span>
+          </div>
+          <button mat-icon-button (click)="removeNotification(i)" matTooltip="Dismiss">
+            <mat-icon>close</mat-icon>
+          </button>
+        </button>
+      </div>
+    </ng-container>
+
+    <!-- Empty State -->
+    <ng-template #noNotifications>
+      <div class="empty-notification">
+        <mat-icon class="empty-icon">check_circle</mat-icon>
+        <span>No new notifications</span>
+      </div>
+    </ng-template>
+  </mat-menu>
+
+
+
+
+  <span class="flex-1-auto"></span>
+
+  <!-- --------------------------------------------------------------- -->
+  <!-- profile Dropdown -->
+  <!-- --------------------------------------------------------------- -->
+  <mat-card-title style="color: white; padding-right: 2rem; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">
+    Welcome, {{userRole | titlecase}}!
+  </mat-card-title>
+
+  <button mat-mini-fab [matMenuTriggerFor]="profilemenu" aria-label="Notifications">
+    <img src="/assets/images/profile/user-1.jpg" class="rounded-circle object-cover d-block" width="35" />
+  </button>
+  <mat-menu #profilemenu="matMenu" class="cardWithShadow topbar-dd">
+    <button mat-menu-item>
+      <mat-icon class="d-flex align-items-center"><i-tabler name="user" class="icon-18 d-flex"></i-tabler></mat-icon>My
+      Profile
+    </button>
+    <!-- <button mat-menu-item>
+      <mat-icon class="d-flex align-items-center"><i-tabler name="mail" class="icon-18 d-flex"></i-tabler></mat-icon>My
+      Account
+    </button>
+    <button mat-menu-item>
+      <mat-icon class="d-flex align-items-center"><i-tabler name="list-check"
+          class="icon-18 d-flex"></i-tabler></mat-icon>My Task
+    </button> -->
+
+    <div class="p-x-12 m-t-12">
+      <button (click)="logout()" mat-stroked-button class="w-100">Logout</button>
+    </div>
+  </mat-menu>
+</mat-toolbar>

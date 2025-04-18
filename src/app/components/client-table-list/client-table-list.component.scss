@@ -1,0 +1,141 @@
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+}
+
+th, td {
+  padding: 5px 10px;
+  font-size: 13px;
+  font-weight: 500; /* Bold text */
+  text-align: center;
+  border: 1px solid #ddd; /* Soft border for cells */
+  color: #333;
+  transition: all 0.3s ease; /* Smooth transition for hover effect */
+}
+
+th {
+  background-color: #e3f2fd; /* Light blue background */
+  color: #0d47a1;
+  font-weight: 700;
+}
+td {
+  background-color: #fafafa; /* Light grey background for data cells */
+  color: #555;
+}
+
+tr:nth-child(even) td {
+  background-color: #f1f1f1; /* Light striped rows for contrast */
+}
+
+tr:hover td {
+  background-color: #e8f5e9; /* Hover effect for rows */
+  color: #0d47a1; /* Highlight text on hover */
+}
+
+.mat-row {
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth hover transitions */
+}
+.mat-row:hover {
+  background-color: #f1f1f1;
+}
+.status-new {
+  color: #1976d2;
+  font-weight: bold;
+}
+
+.status-inprogress {
+  color: #ff9800;
+  font-weight: bold;
+}
+
+.status-completed {
+  color: #4caf50;
+  font-weight: bold;
+}
+
+.dd-text {
+  font: 400 12px/13px Roboto, "Helvetica Neue", sans-serif !important; /* Apply font style */
+}
+
+.due-exceeded {
+  color: red;
+  font-weight: bold;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+.overdue {
+  color: red;
+  font-weight: bold;
+}
+
+.edit-btn{
+  color: lightseagreen;
+}
+.delete-btn{
+  color: red;
+}
+.export-btn {
+  background-color: #4CAF50;  // Nice green
+  color: white;
+  font-size: 12px;
+  padding: 4px 12px;
+  min-height: 32px;
+  line-height: 20px;
+  border-radius: 6px;
+  text-transform: none; // Prevent all-caps
+  box-shadow: none;
+
+  &:hover {
+    background-color: #45A049;
+  }
+}
+
+.add-client-btn {
+  background-color: #1976d2;
+  color: white;
+  font-size: 13px;
+  padding: 4px 12px;
+  min-height: 36px;
+  line-height: 20px;
+  border-radius: 6px;
+  text-transform: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  &:hover {
+    background-color: #1565c0;
+  }
+
+  mat-icon {
+    font-size: 18px;
+  }
+}
+
+.no-entries {
+  text-align: center;
+  padding: 20px;
+  font-size: 1.2rem;
+  color: #888;
+}
+.aling-style{
+  display: flex;
+  justify-content: center;
+}
+.padding{
+  padding-left: 20px;
+}
+

@@ -1,0 +1,50 @@
+/* side-login.component.scss */
+
+.blank-layout-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f8f9fa;
+}
+
+.cardWithShadow {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  background-color: #ffffff;
+  width: 100%;
+  padding: 2rem;
+}
+
+.boxed-auth {
+  width: 100%;
+}
+
+.logo-image {
+  max-width: 120px;
+  height: auto;
+  display: block;
+  margin: 0 auto 20px;
+  border-radius: 8px;
+}
+
+.mat-form-field {
+  margin-bottom: 16px;
+}
+
+
+
+.error-icon {
+  font-size: 18px;
+  margin-right: 6px;
+}
+
+button[mat-flat-button] {
+  margin-top: 12px;
+  padding: 10px 0;
+  font-weight: 600;
+}
+
+.text-center {
+  text-align: center;
+}

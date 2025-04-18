@@ -1,0 +1,59 @@
+mat-form-field {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+mat-dialog-actions {
+  margin-top: 10px;
+}
+/* For the close button on top-right */
+.close-button {
+  position: absolute;
+  right: 16px;
+  top: 16px;
+}
+
+.add-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 4px; /* Slightly rounded edges */
+  text-transform: none; /* No uppercase text */
+  background-color: #4caf50; /* Default green color */
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease; /* Smooth transition for hover effects */
+}
+
+.add-btn mat-icon {
+  margin-right: 8px;
+  font-size: 20px;
+}
+
+.add-btn:hover {
+  background-color: #388e3c;
+}
+
+.add-btn:disabled {
+  background-color: #bdbdbd;
+  cursor: not-allowed;
+}
+
+.add-btn:enabled {
+  transition: background-color 0.3s ease;
+}
+
+.add-btn:enabled:hover {
+  background-color: #388e3c;
+}
+
+.disabled-btn {
+  background-color: #f1f1f1;
+  cursor: not-allowed;
+}
+
+

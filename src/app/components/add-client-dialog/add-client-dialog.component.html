@@ -1,0 +1,68 @@
+<mat-card-title class="p-3">
+  <span>{{ data ? 'Edit Project' : 'Add Project' }}</span>
+  <button mat-icon-button (click)="closeDialog()" class="close-button" aria-label="Close">
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-card-title>
+
+<mat-dialog-content>
+  <form [formGroup]="projectForm">
+
+    <!-- Project Name -->
+    <mat-form-field appearance="outline">
+      <mat-label>Project Name</mat-label>
+      <input matInput formControlName="projectName" maxlength="50">
+    </mat-form-field>
+
+    <!-- Priority -->
+    <mat-form-field appearance="outline">
+      <mat-label>Priority</mat-label>
+      <mat-select formControlName="priority">
+        <mat-option value="">--Select--</mat-option>
+        <mat-option value="High">High</mat-option>
+        <mat-option value="Medium">Medium</mat-option>
+        <mat-option value="Low">Low</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Status -->
+    <mat-form-field appearance="outline">
+      <mat-label>Status</mat-label>
+      <mat-select formControlName="status">
+        <mat-option value="">--Select--</mat-option>
+        <mat-option value="New">New</mat-option>
+        <mat-option value="In-Progess">In-Progess</mat-option>
+        <mat-option value="Completed">Completed</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Start Date -->
+    <mat-form-field appearance="outline">
+      <mat-label>Start Date</mat-label>
+      <input matInput formControlName="startDate" type="date">
+    </mat-form-field>
+
+    <!-- End Date -->
+    <mat-form-field appearance="outline">
+      <mat-label>End Date</mat-label>
+      <input matInput formControlName="endDate" type="date">
+    </mat-form-field>
+
+    <!-- Description -->
+    <mat-form-field appearance="outline">
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="description" maxlength="250"></textarea>
+    </mat-form-field>
+
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="closeDialog()">Cancel</button>
+
+  <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="!projectForm.valid" class="add-btn"
+    matRipple [ngClass]="{'disabled-btn': !projectForm.valid}">
+    <mat-icon>add_circle_outline</mat-icon>
+    <span>{{ data ? 'Update Project' : 'Add Project' }}</span>
+  </button>
+</mat-dialog-actions>

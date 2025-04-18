@@ -1,0 +1,127 @@
+<mat-card>
+  <div class="table-container">
+    <h2 class="table-heading pt-3 padding">Projects List</h2>
+    <div class="row">
+      <div class="col-8">
+        <mat-form-field appearance="outline" class="search-bar pt-3 p-3 pb-0">
+          <mat-label>Search Projects</mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="Search by any column">
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+        <button mat-raised-button color="primary" class="export-btn" matTooltip="Export to Excel"
+          (click)="exportToExcel()">
+          Export to Excel
+        </button>
+      </div>
+      <div class="col-4 mt-3 aling-style" *ngIf="userRole === 'Admin'">
+        <button mat-raised-button class="add-client-btn" matTooltip="Add Project" (click)="addPrpject()">
+          <mat-icon>add</mat-icon>Add Project
+        </button>
+      </div>
+    </div>
+    <div class="table-responsive">
+      <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+        <!-- Serial Number -->
+        <ng-container matColumnDef="serialNo">
+          <th mat-header-cell *matHeaderCellDef> Si. No. </th>
+          <td mat-cell *matCellDef="let project; let i = index"> {{ i + 1 }} </td>
+        </ng-container>
+
+        <!-- Project Name -->
+        <ng-container matColumnDef="projectName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Project Name </th>
+          <td mat-cell *matCellDef="let project"> {{ project.projectName }} </td>
+        </ng-container>
+
+        <!-- Description -->
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef> Description </th>
+          <td mat-cell *matCellDef="let project"> {{ project.description || "--" }} </td>
+        </ng-container>
+
+        <!-- Priority -->
+        <ng-container matColumnDef="priority">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Priority </th>
+          <td mat-cell *matCellDef="let project"> {{ project.priority }} </td>
+        </ng-container>
+
+        <!-- Status Column -->
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+          <td mat-cell *matCellDef="let project">
+            <span [ngClass]="{
+                'status-new': project.status === 'New',
+                'status-inprogress': project.status === 'In-Progess',
+                'status-completed': project.status === 'Completed'
+              }">
+              {{ project.status }}
+            </span>
+          </td>
+        </ng-container>
+
+
+        <!-- Start Date -->
+        <ng-container matColumnDef="startDate">
+          <th mat-header-cell *matHeaderCellDef> Start Date </th>
+          <td mat-cell *matCellDef="let project">
+            {{ project.startDate | date: 'dd-MMM-yyyy' }}
+          </td>
+        </ng-container>
+
+        <!-- End Date -->
+        <ng-container matColumnDef="endDate">
+          <th mat-header-cell *matHeaderCellDef> End Date </th>
+          <td mat-cell *matCellDef="let project">
+            <span [ngClass]="isDueDateExceeded(project.endDate) ? 'due-exceeded' : ''">
+              {{ project.endDate | date: 'dd-MMM-yyyy' }}
+            </span>
+          </td>
+        </ng-container>
+
+        <!-- Created By -->
+        <ng-container matColumnDef="createdBy">
+          <th mat-header-cell *matHeaderCellDef> Created By </th>
+          <td mat-cell *matCellDef="let project">
+            {{ project.createdBy }}
+          </td>
+        </ng-container>
+
+        <!-- Created Date -->
+        <ng-container matColumnDef="createdDate">
+          <th mat-header-cell *matHeaderCellDef> Created Date </th>
+          <td mat-cell *matCellDef="let project">
+            {{ project.createdDate | date: 'dd-MMM-yyyy' }}
+          </td>
+        </ng-container>
+
+        <!-- Actions -->
+        <ng-container matColumnDef="actions" *ngIf="userRole === 'Admin'">
+          <th mat-header-cell *matHeaderCellDef> Actions </th>
+          <td mat-cell *matCellDef="let project; let i = index">
+            <button mat-icon-button class="edit-btn" (click)="updateProject(project)" matTooltip="Edit Project">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button class="delete-btn" (click)="deleteProject(project)" matTooltip="Delete Project">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <!-- Table Header -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+
+        <!-- Table Rows or "No Entries Available" Message -->
+        <ng-container *ngIf="dataSource.data.length === 0">
+          <tr>
+            <td colspan="8">No entries available</td>
+          </tr>
+        </ng-container>
+
+        <!-- Table Rows -->
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    </div>
+  </div>
+</mat-card>
