@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { FullComponent } from './layouts/full/full.component';
 import { AppSideLoginComponent } from './pages/authentication/side-login/side-login.component';
 import { AuthGuard } from './shared/auth.guard';
+import { PageNotFoundComponent } from './components/pages/page-not-found/page-not-found.component';
 
 export const routes: Routes = [
   {
@@ -34,6 +35,6 @@ export const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: '',
-  },
+    component: PageNotFoundComponent
+  }
 ];
