@@ -20,6 +20,8 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrl: './client-table-list.component.scss'
 })
 export class ClientTableListComponent {
+
+  funcListener: any;
   constructor(
     public dialog: MatDialog,
     private snackBar: MatSnackBar,
@@ -30,6 +32,9 @@ export class ClientTableListComponent {
     this.communicationService.projectGetFunctionCall$.subscribe(() => {
       this.getProjectsList();
     });
+
+    this.funcListener = this.func.bind(this);
+    window.addEventListener('storage', this.funcListener);
   }
   userRole: string = '';
   displayedColumns: string[] = [
@@ -109,6 +114,8 @@ export class ClientTableListComponent {
       if (result) {
         this.projectService.deleteProject(project.projectID).subscribe({
           next: () => {
+            localStorage.removeItem('checkNewTabData');
+            localStorage.setItem('checkNewTabData', 'NewTabDataSaved');
             this.successtoastMessage("Project deleted successfully!");
             this.getProjectsList();
           },
@@ -159,6 +166,11 @@ export class ClientTableListComponent {
     XLSX.writeFile(workbook, 'Projects_List.xlsx');
   }
 
+  func(event: StorageEvent): void {
+    if (event.key === 'checkNewTabData' && event.newValue === 'NewTabDataSaved') {
+      this.getProjectsList();
+    }
+  }
 }
 
 

@@ -77,8 +77,11 @@ export class AddClientDialogComponent {
         (res) => {
           this.closeDialog();
           if (res.success) {
+            localStorage.removeItem('checkNewTabData');
+            localStorage.setItem('checkNewTabData', 'NewTabDataSaved');
             this.successtoastMessage("Project Saved successfully!");
             this.communicationService.triggerProjectGetList();
+
           }
         },
         (err) => {
@@ -133,6 +136,8 @@ export class AddClientDialogComponent {
         (res) => {
           this.closeDialog();
           if (res.success) {
+            localStorage.removeItem('checkNewTabData');
+            localStorage.setItem('checkNewTabData', 'NewTabDataSaved');
             this.successtoastMessage("Project Updated successfully!");
             this.communicationService.triggerProjectGetList();
           }
