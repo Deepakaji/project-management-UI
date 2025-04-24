@@ -1,3 +1,3 @@
-# GST Filing Web Application
+# Project Management Web Application
 
-The GST Filing Web Application is designed to facilitate GST filing management for Agents, Clients, and Auditors. It provides a user-friendly dashboard to track filings, payments, and due dates.
+The Project Management Web Application is designed to facilitate Project Management for Admin, and Viewer. It provides a user-friendly dashboard to track Projecs.
