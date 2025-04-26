@@ -7,6 +7,7 @@ import { MaterialModule } from 'src/app/material.module';
 import { ProjectService } from 'src/app/services/project.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { CommunicationService } from 'src/app/services/communication.service';
+import { SignalrService } from 'src/app/services/signalr.service';
 
 @Component({
   selector: 'app-add-client-dialog',
@@ -77,8 +78,8 @@ export class AddClientDialogComponent {
         (res) => {
           this.closeDialog();
           if (res.success) {
-            localStorage.removeItem('checkNewTabData');
-            localStorage.setItem('checkNewTabData', 'NewTabDataSaved');
+            // localStorage.removeItem('checkNewTabData');
+            // localStorage.setItem('checkNewTabData', 'NewTabDataSaved');
             this.successtoastMessage("Project Saved successfully!");
             this.communicationService.triggerProjectGetList();
 

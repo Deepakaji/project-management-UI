@@ -12,6 +12,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ProjectService } from 'src/app/services/project.service';
 import { CommunicationService } from 'src/app/services/communication.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { SignalrService } from 'src/app/services/signalr.service';
 
 @Component({
   selector: 'app-client-table-list',
@@ -27,7 +28,8 @@ export class ClientTableListComponent {
     private snackBar: MatSnackBar,
     private projectService: ProjectService,
     private communicationService: CommunicationService,
-    private authService:AuthService
+    private authService:AuthService,
+    private signalRService: SignalrService,
   ) {
     this.communicationService.projectGetFunctionCall$.subscribe(() => {
       this.getProjectsList();
@@ -62,6 +64,26 @@ export class ClientTableListComponent {
     if (this.userRole === 'Admin') {
       this.displayedColumns.push('actions');
     }
+
+    this.signalRService.startConnection();
+
+    this.signalRService.onProjectSaved((project) => {
+      console.log('New project saved:', project);
+      this.successtoastMessage("Project Saved successfully!");
+      this.communicationService.triggerProjectGetList();
+    });
+
+    this.signalRService.onProjectUpdated((project) => {
+      console.log('Project updated:', project);
+      this.successtoastMessage("Project Updaed successfully!");
+      this.communicationService.triggerProjectGetList();
+    });
+
+    this.signalRService.onProjectDeleted((project) => {
+      console.log('Project deleted:', project);
+      this.successtoastMessage("Project deleted successfully!");
+      this.communicationService.triggerProjectGetList();
+    });
   }
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
